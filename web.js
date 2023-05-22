@@ -272,8 +272,8 @@ app.post('/api/singup', (req, res) => {
 
 app.put('/api/user/imgupdate', (req, res) => {
     const sql = 'UPDATE user_info SET user_img = ? WHERE user_id = ?';
-    const img = req.query.img;
-    const id = req.query.id;
+    const img = req.body.img;
+    const id = req.body.id;
     const params = [img, id];
     connection.query(sql, params, (err, rows, fields) => {
         if (err) {
@@ -286,8 +286,8 @@ app.put('/api/user/imgupdate', (req, res) => {
 
 app.put('/api/user/pwupdate', (req, res) => {
     const sql = 'UPDATE user_info SET user_pw = ? WHERE user_id = ?';
-    const pw = req.query.pw;
-    const id = req.query.id;
+    const pw = req.body.pw;
+    const id = req.body.id;
     const params = [pw, id];
     connection.query(sql, params, (err, rows, fields) => {
         if (err) {
@@ -300,8 +300,8 @@ app.put('/api/user/pwupdate', (req, res) => {
 
 app.put('/api/user/nicknameupdate', (req, res) => {
     const sql = 'UPDATE user_info SET user_nickname = ? WHERE user_id = ?';
-    const nickName = req.query.nickName;
-    const id = req.query.id;
+    const nickName = req.body.nickName;
+    const id = req.body.id;
     const params = [nickName, id];
     connection.query(sql, params, (err, rows, fields) => {
         if (err) {
@@ -512,7 +512,7 @@ app.delete('/api/community/delete', (req, res) => {
 app.put('/api/community/viewsplus', (req, res) => {
     const sql =
         'UPDATE community SET community_view = community_view + 1 WHERE community_no = ?';
-    const no = req.query.no;
+    const no = req.body.no;
     const params = [no];
     connection.query(sql, params, (err, rows, fields) => {
         if (err) {
@@ -529,8 +529,8 @@ app.put('/api/community/commendplus', (req, res) => {
         'UPDATE community SET community_commend = community_commend + 1 WHERE community_no = ?';
     const sql_2 =
         'INSERT INTO commend_list(commend_no, user_id, commend_date) VALUES(?, ?, ?);';
-    const no = req.query.no;
-    const id = req.query.id;
+    const no = req.body.no;
+    const id = req.body.id;
     const commend_date = date();
     const params1 = [no];
     const params2 = [no, id, commend_date];
