@@ -133,7 +133,7 @@ export async function communityDelete(info: community_CRUD) {
     const id = info.id;
 
     const url: string = `${PROXY}/api/community/delete`;
-    return axios.get(url, { params: { no, id } });
+    return axios.delete(url, { params: { no, id } });
 }
 
 export async function communityViewPlus(no: string) {

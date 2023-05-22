@@ -37,7 +37,7 @@ let connection;
 
 handleDisconnect();
 
-//app.use(cors());
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -494,7 +494,7 @@ app.post('/api/community/update', (req, res) => {
     });
 });
 
-app.get('/api/community/delete', (req, res) => {
+app.delete('/api/community/delete', (req, res) => {
     console.log(req.query);
     const sql = 'DELETE FROM community WHERE community_no = ? AND user_id = ?';
     const no = req.query.no;
