@@ -4,12 +4,8 @@ const bodyParser = require('body-parser');
 const ogs = require('open-graph-scraper');
 const passport = require('passport');
 const path = require('path');
-const google_passport = require('passport');
-const http = require('http');
-const https = require('https');
 
 const LocalStrategy = require('passport-local').Strategy;
-const GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 const session = require('express-session');
 
@@ -22,14 +18,6 @@ const mysql = require('mysql');
 const data = fs.readFileSync(__dirname + '/database.json');
 
 const cors = require('cors');
-
-// const googleClinet = fs.readFileSync('./google_client_secret.json');
-// const gconf = JSON.parse(googleClinet);
-// const GOOGLE_CLIENT_ID = gconf.web.client_id;
-// const GOOGLE_CLIENT_SECRET = gconf.web.client_secret;
-
-//console.log('GOOGLE_CLIENT_ID', GOOGLE_CLIENT_ID);
-//console.log('GOOGLE_CLIENT_SECRET', GOOGLE_CLIENT_SECRET);
 
 const conf = JSON.parse(data);
 
@@ -44,14 +32,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
     session({
         secret: 'loginInfo',
-        // cookie: {
-        //     domain: 'leicestercity.pro',
-        //     path: '/',
-        //     originalMaxAge: 86400000,
-        //     httpOnly: true,
-        //     secure: false,
-        //     sameSite: 'none',
-        // },
     })
 );
 app.use(passport.initialize());
@@ -169,67 +149,6 @@ const userInfoFilteredByID = (id, pw, callback) => {
 
     /* result는 db에서 오는 엄청나게 다양한 정보를 담고 있고 index 0에 있는 것이 우리가 원하는 필터링을 한 유저 정보의 배열이다. 단 async 함수이므로 리턴값은 promise 객체에 감싸인 배열이고 이를 받아 줄 때는 await으로 받아 줘야 한다. */
 };
-
-// app.get(
-//     '/api/google/googlelogin',
-//     passport.authenticate('google', { scope: ['email', 'profile'] })
-// );
-
-// app.get(
-//     '/api/google/login/callback',
-//     passport.authenticate('google', {
-//         successRedirect: '/api/google/firstlogin',
-//         failureRedirect: '/api/google/loginfail',
-//     })
-// );
-
-// app.get('/api/google/firstlogin', (req, res) => {
-//     console.log('구글 로그인 성공');
-// });
-
-// app.get('/api/google/loginfail', (req, res) => {
-//     console.log('구글 로그인 실패');
-// });
-
-// // login이 최초로 성공했을 때만 호출되는 함수
-// // done(null, user.id)로 세션을 초기화 한다.
-// passport.serializeUser((user, done) => {
-//     console.log('구글 유저 정보', user);
-//     done(null, user.id);
-// });
-
-// // 사용자가 페이지를 방문할 때마다 호출되는 함수
-// // done(null, id)로 사용자의 정보를 각 request의 user 변수에 넣어준다.
-// passport.deserializeUser((id, done) => {
-//     console.log('구글 아이디', id);
-
-//     const sql =
-//         'SELECT user_id, user_pw, user_email, user_nickname, user_img FROM user_info WHERE user_id = ? AND user_pw = ?';
-//     connection.query(sql, [id, ''], (err, rows, fields) => {
-//         done(null, rows);
-//     });
-// });
-
-// // Google login 전략
-// // 로그인 성공 시 callback으로 request, accessToken, refreshToken, profile 등이 나온다.
-// // 해당 콜백 function에서 사용자가 누구인지 done(null, user) 형식으로 넣으면 된다.
-// // 이 예시에서는 넘겨받은 profile을 전달하는 것으로 대체했다.
-// passport.use(
-//     new GoogleStrategy(
-//         {
-//             clientID: GOOGLE_CLIENT_ID,
-//             clientSecret: GOOGLE_CLIENT_SECRET,
-//             callbackURL: '/api/google/login/callback',
-//             passReqToCallback: true,
-//         },
-//         function (request, accessToken, refreshToken, profile, done) {
-//             console.log('구글 프로필', profile);
-//             console.log('구글 토큰', accessToken);
-
-//             return done(null, profile);
-//         }
-//     )
-// );
 
 app.get('/api/sessioncheck', loginCheck, (req, res) => {
     res.send(req.user);
