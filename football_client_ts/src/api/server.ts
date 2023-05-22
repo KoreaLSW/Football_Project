@@ -72,19 +72,19 @@ export async function userSessionCheck() {
 export async function userImgUpdate(user: userInfo) {
     const url: string = `${PROXY}/api/user/imgupdate`;
 
-    return axios.get(url, { params: { id: user.id, img: user.img } });
+    return axios.put(url, { params: { id: user.id, img: user.img } });
 }
 
 export async function userPwUpdate(id: string, pw: string) {
     const url: string = `${PROXY}/api/user/pwupdate`;
 
-    return axios.get(url, { params: { id, pw } });
+    return axios.put(url, { params: { id, pw } });
 }
 
 export async function userNickNameUpdate(id: string, nickName: string) {
     const url: string = `${PROXY}/api/user/nicknameupdate`;
 
-    return axios.get(url, { params: { id, nickName } });
+    return axios.put(url, { params: { id, nickName } });
 }
 
 export async function userNickNameCheck(nickName: string | undefined) {
@@ -138,7 +138,7 @@ export async function communityDelete(info: community_CRUD) {
 
 export async function communityViewPlus(no: string) {
     const url: string = `${PROXY}/api/community/viewsplus`;
-    return axios.get(url, { params: { no } });
+    return axios.put(url, { params: { no } });
 }
 
 export async function communityCommendPlus(info: community_CRUD) {
@@ -147,7 +147,7 @@ export async function communityCommendPlus(info: community_CRUD) {
     const id = info.id;
 
     const url: string = `${PROXY}/api/community/commendplus`;
-    return axios.get(url, { params: { no, id } });
+    return axios.put(url, { params: { no, id } });
 }
 
 export async function uploadImage(file: File, id: string, type: string) {

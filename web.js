@@ -270,7 +270,7 @@ app.post('/api/singup', (req, res) => {
     });
 });
 
-app.get('/api/user/imgupdate', (req, res) => {
+app.put('/api/user/imgupdate', (req, res) => {
     const sql = 'UPDATE user_info SET user_img = ? WHERE user_id = ?';
     const img = req.query.img;
     const id = req.query.id;
@@ -284,7 +284,7 @@ app.get('/api/user/imgupdate', (req, res) => {
     });
 });
 
-app.get('/api/user/pwupdate', (req, res) => {
+app.put('/api/user/pwupdate', (req, res) => {
     const sql = 'UPDATE user_info SET user_pw = ? WHERE user_id = ?';
     const pw = req.query.pw;
     const id = req.query.id;
@@ -298,7 +298,7 @@ app.get('/api/user/pwupdate', (req, res) => {
     });
 });
 
-app.get('/api/user/nicknameupdate', (req, res) => {
+app.put('/api/user/nicknameupdate', (req, res) => {
     const sql = 'UPDATE user_info SET user_nickname = ? WHERE user_id = ?';
     const nickName = req.query.nickName;
     const id = req.query.id;
@@ -509,7 +509,7 @@ app.delete('/api/community/delete', (req, res) => {
     });
 });
 
-app.get('/api/community/viewsplus', (req, res) => {
+app.put('/api/community/viewsplus', (req, res) => {
     const sql =
         'UPDATE community SET community_view = community_view + 1 WHERE community_no = ?';
     const no = req.query.no;
@@ -523,7 +523,7 @@ app.get('/api/community/viewsplus', (req, res) => {
     });
 });
 
-app.get('/api/community/commendplus', (req, res) => {
+app.put('/api/community/commendplus', (req, res) => {
     //console.log('imgupdate', req.query);
     const sql_1 =
         'UPDATE community SET community_commend = community_commend + 1 WHERE community_no = ?';
